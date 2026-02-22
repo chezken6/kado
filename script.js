@@ -108,9 +108,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Navigate to game page
                 setTimeout(() => {
                     if (gameName === 'snake') {
-                        window.location.href = 'snake.html';
+                        window.location.href = 'pages/snake.html';
                     } else if (gameName === 'tetris') {
-                        window.location.href = 'tetris.html';
+                        window.location.href = 'pages/tetris.html';
                     } else {
                         alert(`Game "${gameName}" coming soon! 🎮`);
                     }
@@ -417,6 +417,40 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    // ===== MUSIC CONTROL FUNCTIONS =====
+    // Global functions untuk onclick handlers di musik.html
+    window.goBack = function () {
+        playUISound();
+        setTimeout(() => {
+            // Check if we're on a music/pesan/game page and navigate back to index
+            if (window.location.pathname.includes('/pages/')) {
+                window.location.href = '../index.html';
+            } else {
+                window.location.href = 'index.html';
+            }
+        }, 200);
+    };
+
+    window.volumeUp = function () {
+        if (musicPlayer && musicPlayer.volume < 1) {
+            musicPlayer.volume = Math.min(1, musicPlayer.volume + 0.1);
+            if (volumeFill) {
+                volumeFill.style.width = (musicPlayer.volume * 100) + '%';
+            }
+            saveMusicState();
+        }
+    };
+
+    window.volumeDown = function () {
+        if (musicPlayer && musicPlayer.volume > 0) {
+            musicPlayer.volume = Math.max(0, musicPlayer.volume - 0.1);
+            if (volumeFill) {
+                volumeFill.style.width = (musicPlayer.volume * 100) + '%';
+            }
+            saveMusicState();
+        }
+    };
 
     console.log("Script siap!");
 });
