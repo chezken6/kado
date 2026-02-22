@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUP Game Console - Musik</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .progress-container {
+            margin: 4px 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            height: 4px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: #27ae60;
+            height: 100%;
+            border-radius: 6px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 6px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 2px;
+            margin-bottom: 6px;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .volume-slider {
+            width: 60px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .volume-fill {
+            height: 100%;
+            background: #3498db;
+            border-radius: 3px;
+            width: 100%;
+        }
+
+        .volume-icon {
+            font-size: 12px;
+        }
+
+        .music-icon.playing {
+            animation: pulse-music 0.8s ease-in-out infinite;
+        }
+
+        @keyframes pulse-music {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Hide scrollbar but keep scrolling */
+        .playlist::-webkit-scrollbar {
+            display: none;
+        }
+
+        .playlist {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="console-container">
+        <audio id="uiSound" src="../sounds/button_1.mp3"></audio>
+        <audio id="controlSound" src="../sounds/klik.mp3"></audio>
+        <audio id="musicPlayer"></audio>
+
+        <div class="screen">
+            <div class="screen-content">
+                <button class="back-button" onclick="goBack()">
+                    <span>← HOME</span>
+                </button>
+
+                <h1 class="title">MUSIK</h1>
+
+                <div class="music-player">
+                    <div class="now-playing">
+                        <span class="music-icon" id="musicIcon">🎵</span>
+                        <div class="song-info">
+                            <div class="song-title" id="songTitle">Pilih Lagu</div>
+                            <div class="song-artist" id="songArtist">-</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <div class="time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+
+                    <div class="music-controls">
+                        <button class="music-btn" id="prevBtn" onclick="previousTrack()">⏮</button>
+                        <button class="music-btn play-btn" id="playBtn" onclick="togglePlay()">▶</button>
+                        <button class="music-btn" id="nextBtn" onclick="nextTrack()">⏭</button>
+                    </div>
+
+                    <div class="volume-container">
+                        <span class="volume-icon">🔊</span>
+                        <div class="volume-slider" id="volumeSlider">
+                            <div class="volume-fill" id="volumeFill"></div>
+                        </div>
+                    </div>
+
+                    <div class="playlist">
+                        <div class="playlist-item active" data-index="0">
+                            <span>1. HBD</span>
+                        </div>
+                        <div class="playlist-item" data-index="1">
+                            <span>2. Girl Like You</span>
+                        </div>
+                        <div class="playlist-item" data-index="3">
+                            <span>3. Happines</span>
+                        </div>
+                        <div class="playlist-item" data-index="4">
+                            <span>4. Senorita</span>
+                        </div>
+                        <div class="playlist-item" data-index="5">
+                            <span>5. Stuck With You</span>
+                        </div>
+                        <div class="playlist-item" data-index="6">
+                            <span>6. Youre Still The One</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="dpad">
+                <button class="dpad-button up" onclick="volumeUp()">↑</button>
+                <button class="dpad-button left" onclick="previousTrack()">←</button>
+                <button class="dpad-button center"></button>
+                <button class="dpad-button right" onclick="nextTrack()">→</button>
+                <button class="dpad-button down" onclick="volumeDown()">↓</button>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn" onclick="togglePlay()">A</button>
+                <button class="action-btn" onclick="goBack()">B</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+    <script>
+        // Additional music page specific functionality can go here
+        // The main music player functionality is now in script.js
+
+        // Go back function remains specific to this page
+        function goBack() {
+            const uiSound = document.getElementById('uiSound');
+            if (uiSound) {
+                uiSound.currentTime = 0;
+                uiSound.play().catch(err => console.error("Error playing UI sound:", err));
+            }
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 200);
+        }
+
+        // Volume controls remain specific to this page
+        function volumeUp() {
+            const controlSound = document.getElementById('controlSound');
+            const musicPlayer = document.getElementById('musicPlayer');
+            if (controlSound) {
+                controlSound.currentTime = 0;
+                controlSound.play().catch(err => console.error("Error playing control sound:", err));
+            }
+            if (musicPlayer) {
+                musicPlayer.volume = Math.min(1, musicPlayer.volume + 0.1);
+                const volumeFill = document.getElementById('volumeFill');
+                if (volumeFill) {
+                    volumeFill.style.width = (musicPlayer.volume * 100) + '%';
+                }
+            }
+        }
+
+        function volumeDown() {
+            const controlSound = document.getElementById('controlSound');
+            const musicPlayer = document.getElementById('musicPlayer');
+            if (controlSound) {
+                controlSound.currentTime = 0;
+                controlSound.play().catch(err => console.error("Error playing control sound:", err));
+            }
+            if (musicPlayer) {
+                musicPlayer.volume = Math.max(0, musicPlayer.volume - 0.1);
+                const volumeFill = document.getElementById('volumeFill');
+                if (volumeFill) {
+                    volumeFill.style.width = (musicPlayer.volume * 100) + '%';
+                }
+            }
+        }
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            switch (e.key.toLowerCase()) {
+                case ' ':
+                    e.preventDefault();
+                    togglePlay();
+                    break;
+                case 'arrowleft':
+                    e.preventDefault();
+                    previousTrack();
+                    break;
+                case 'arrowright':
+                    e.preventDefault();
+                    nextTrack();
+                    break;
+                case 'arrowup':
+                    e.preventDefault();
+                    volumeUp();
+                    break;
+                case 'arrowdown':
+                    e.preventDefault();
+                    volumeDown();
+                    break;
+            }
+        });
+    </script>
+</body>
+
+</html>

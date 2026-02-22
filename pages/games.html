@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUP Game Console - Pilih Game</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div class="console-container">
+        <audio id="uiSound" src="../sounds/button_1.mp3"></audio>
+        <audio id="controlSound" src="../sounds/klik.mp3"></audio>
+        <audio id="musicPlayer"></audio>
+        <div class="screen">
+            <div class="screen-content">
+
+                <button class="back-button" data-link="index.html">
+                    <span>← HOME</span>
+                </button>
+
+                <h1 class="title">PILIH GAME</h1>
+
+                <div class="game-list">
+                    <button class="game-item" data-game="snake">
+                        <span class="game-icon">🐍</span>
+                        <span class="game-name">Snake</span>
+                    </button>
+
+                    <button class="game-item" data-game="tetris">
+                        <span class="game-icon">🧱</span>
+                        <span class="game-name">Tetris</span>
+                    </button>
+
+                    <!-- <button class="game-item" data-game="pong">
+                        <span class="game-icon">🏓</span>
+                        <span class="game-name">Pong</span>
+                    </button>
+
+                    <button class="game-item" data-game="racing">
+                        <span class="game-icon">🏎️</span>
+                        <span class="game-name">Racing</span>
+                    </button> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="dpad">
+                <button class="dpad-button up">↑</button>
+                <button class="dpad-button left">←</button>
+                <button class="dpad-button center"></button>
+                <button class="dpad-button right">→</button>
+                <button class="dpad-button down">↓</button>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn">A</button>
+                <button class="action-btn">B</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

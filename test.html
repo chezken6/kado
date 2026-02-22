@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Button Sound Effect</title>
+</head>
+
+<body>
+
+    <button id="btnClick">Klik Aku</button>
+
+    <audio id="clickSound" src="/sounds/click-buttons-.mp3" preload="auto"></audio>
+
+    <script>
+        const button = document.getElementById("btnClick");
+        const sound = document.getElementById("clickSound");
+
+        button.addEventListener("click", () => {
+            sound.currentTime = 0; // reset agar bisa diputar ulang
+            sound.play();
+        });
+    </script>
+
+</body>
+
+</html>

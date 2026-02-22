@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUP Game Console</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <!-- Partikel kado berjatuhan -->
+    <div class="gift-particles">
+        <div class="gift-particle">🎁</div>
+        <div class="gift-particle">🎀</div>
+        <div class="gift-particle">🎁</div>
+        <div class="gift-particle">🎀</div>
+        <div class="gift-particle">🎁</div>
+        <div class="gift-particle">🎀</div>
+        <div class="gift-particle">🎁</div>
+        <div class="gift-particle">🎀</div>
+        <div class="gift-particle">🎁</div>
+        <div class="gift-particle">🎀</div>
+        <div class="gift-particle">🎁</div>
+        <div class="gift-particle">🎀</div>
+        <div class="gift-particle">🎁</div>
+        <div class="gift-particle">🎀</div>
+        <div class="gift-particle">🎁</div>
+        <div class="gift-particle">🎀</div>
+        <div class="gift-particle">🎁</div>
+        <div class="gift-particle">🎀</div>
+        <div class="gift-particle">🎁</div>
+        <div class="gift-particle">🎀</div>
+    </div>
+
+    <div class="console-container">
+        <audio id="uiSound" src="../sounds/button_1.mp3"></audio>
+        <audio id="controlSound" src="../sounds/klik.mp3"></audio>
+        <audio id="musicPlayer"></audio>
+        <div class="screen">
+            <div class="screen-content">
+                <!-- <div class="pixel-art">🌴</div> -->
+                <div class="clouds-1">☁️</div>
+                <div class="clouds-2">☁️</div>
+                <div class="clouds-3">☁️</div>
+
+                <h1 class="title">SELAMAT DATANG!</h1>
+
+                <div class="button-grid">
+                    <button class="menu-button" data-link="games.html">
+                        <span class="icon">🎮</span>
+                        <span>Main Game</span>
+                    </button>
+
+                    <button class="menu-button" data-link="galery.html">
+                        <span class="icon">📸</span>
+                        <span>Galeri</span>
+                    </button>
+
+                    <button class="menu-button" data-link="musik.html">
+                        <span class="icon">🎵</span>
+                        <span>Musik</span>
+                    </button>
+
+                    <button class="menu-button" data-link="pesan.html">
+                        <span class="icon">💌</span>
+                        <span>Pesan</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="dpad">
+                <button class="dpad-button up">↑</button>
+                <button class="dpad-button left">←</button>
+                <button class="dpad-button center"></button>
+                <button class="dpad-button right">→</button>
+                <button class="dpad-button down">↓</button>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn">A</button>
+                <button class="action-btn">B</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
