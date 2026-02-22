@@ -107,10 +107,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Navigate to game page
                 setTimeout(() => {
-                    if (gameName === 'snake') {
-                        window.location.href = 'pages/snake.html';
-                    } else if (gameName === 'tetris') {
-                        window.location.href = 'pages/tetris.html';
+                    // Check if we're already in pages folder
+                    const isInPagesFolder = window.location.pathname.includes('/pages/');
+                    const gameFile = gameName + '.html';
+                    const gameUrl = isInPagesFolder ? gameFile : 'pages/' + gameFile;
+
+                    if (gameName === 'snake' || gameName === 'tetris') {
+                        window.location.href = gameUrl;
                     } else {
                         alert(`Game "${gameName}" coming soon! 🎮`);
                     }
